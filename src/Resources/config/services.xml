@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        
+        <service id="ASSteeredCustomerRegistration\Core\Content\SteeredCustomerRegistrationWhitelist\SteeredCustomerRegistrationWhitelistDefinition">
+            <tag name="shopware.entity.definition" entity="synlab_steered_customer_registration" />
+        </service>
+
+        <service id="ASSteeredCustomerRegistration\Core\Api\ASSteeredCustomerRegistrationController" public="true">
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument id="ASMailService\Core\MailServiceHelper" type="service" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>           
+        </service>
+
+        <service id="ASSteeredCustomerRegistration\Subscriber\CustomerRegistrationEventSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <tag name="shopware.event_subscriber"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService" />
+            <argument id="ASMailService\Core\MailServiceHelper" type="service" />
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="ASSteeredCustomerRegistration\Core\Helper\SteeredCustomerRepositoryContainer" public="true">
+            <argument id="customer_group.repository" type="service" />
+            <argument id="customer.repository" type="service" />
+            <argument id="synlab_steered_customer_registration_whitelist.repository" type="service" />
+        </service>
+
+    </services>
+</container>

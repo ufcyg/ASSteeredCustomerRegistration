@@ -1,0 +1,26 @@
+{% block as_steered_customer_registration_invite_detail %}
+    <sw-page class="as-steered-registration-invite">
+        <template slot="smart-bar-actions">
+            <sw-button :routerLink="{ name: 'as.steered.registration.overview' }">
+                {{ $t('as-steered-customer-registration.detail.cancelButtonText') }}
+            </sw-button>
+
+            <sw-button-process
+                :isLoading="isLoading"
+                :processSuccess="processSuccess"
+                variant="primary"
+                @process-finish="saveFinish"
+                @click="onClickSave">
+                {{ $t('as-steered-customer-registration.detail.saveButtonText') }}
+            </sw-button-process>
+        </template>
+
+        <template slot="content">
+            <sw-card-view>
+                <sw-card v-if="invite" :isLoading="isLoading">
+                    <sw-field :label="$t('as-steered-customer-registration.general.columnTargetMail')" v-model="invite.name"></sw-field>
+                </sw-card>
+            </sw-card-view>
+        </template>
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% block test_from %}
+ <form 
+ action="{{ path('frontend.test.upload') }}"
+ method="post"
+ data-form-csrf-handler="true"
+ data-form-validation="true">
+    {% block test_upload_form_csrf %}
+       {{ sw_csrf('frontend.test.upload') }}
+    {% endblock %}
+    <input type="file" id="upload-file" name="upload_file"  />
+    <button type="submit" class="btn btn-primary">
+      upload                     
+    </button>
+ </form>
+{% endblock %}
+
+{% block steered_customer_registration_overview %}
+    <sw-page class="steered-customer-registration-list">
+        {% block swag_bundle_list_smart_bar_actions %}
+            <template slot="smart-bar-actions">
+                <sw-button variant="submit">
+                    {{ $t('as-steered-customer-registration.general.uploadWhitelist') }}
+                </sw-button>
+            </template>
+        {% endblock %}
+
+        <template slot="content">
+            {% block steered_customer_registration_list_content %}
+                <sw-entity-listing
+                    v-if="invitations"
+                    :items="invitations"
+                    :repository="repository"
+                    :showSelection="false"
+                    :columns="columns">
+                </sw-entity-listing>
+            {% endblock %}
+        </template>
+    </sw-page>
+{% endblock %}

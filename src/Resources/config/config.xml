@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>ASSteeredCustomerRegistration Settings</title>
+        <title lang="de-DE">Einstellungen für gelenkte Kundenregistrierung</title>
+
+        <input-field type="single-select">
+            <name>registrationActiveState</name>
+            <options>
+                <option>
+                    <id>open</id>
+                    <name>Registration opened</name>
+                    <name lang="de-DE">Registrierung geöffnet</name>
+                </option>
+                <option>
+                    <id>restricted</id>
+                    <name>Registration restricted</name>
+                    <name lang="de-DE">Registrierung beschränkt</name>
+                </option>
+                <option>
+                    <id>closed</id>
+                    <name>Registration closed</name>
+                    <name lang="de-DE">Registrierung geschlossen</name>
+                </option>
+            </options>
+            <defaultValue>open</defaultValue>
+            <label>Registration Mode</label>
+            <label lang="de-DE">Registrierungsmodus</label>
+        </input-field>
+
+        <component name="sw-entity-single-select"> 
+            <name>idleCustomerGroup</name>
+            <entity>customer_group</entity>
+            <label>Choose customer group for newly registered customers to idle while waiting for approval</label>
+        </component>
+
+        <component name="sw-entity-single-select">
+            <name>internalCustomerGroup</name>
+            <entity>customer_group</entity>
+            <label>Choose customer group for internal customers to be assigned to if they register with a whitelisted eMail address</label>
+        </component>
+
+        <component name="sw-entity-single-select">
+            <name>fallbackSaleschannelNotification</name>
+            <entity>sales_channel</entity>
+            <label>Choose a fallback sales channel as origin for notifications if no other sales channel is known</label>
+        </component>
+        
+    </card>
+</config>

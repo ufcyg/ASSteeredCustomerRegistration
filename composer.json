@@ -1,0 +1,27 @@
+{
+  "name": "as/steered-customer-registration",
+  "description": "Allows to invite customers and verify their registration",
+  "type": "shopware-platform-plugin",
+  "version": "v0.5.1",
+  "license": "proprietary",
+  "authors": [
+    {
+        "name": "SGS IT"
+    }
+  ],
+  "require": {
+    "as/mail-service": "*.*.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "ASSteeredCustomerRegistration\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "ASSteeredCustomerRegistration\\ASSteeredCustomerRegistration",
+    "label": {
+      "de-DE": "Gelenkte Kundenregistrierung",
+      "en-GB": "Steered customer registration"
+    }
+  }
+}

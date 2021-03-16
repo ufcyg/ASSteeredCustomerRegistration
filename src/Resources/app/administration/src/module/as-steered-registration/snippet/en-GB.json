@@ -1,0 +1,19 @@
+{
+    "as-steered-customer-registration": {
+      "general": {
+        "mainMenuItemGeneral": "Steered Customer Registration",
+        "descriptionTextModule": "Tool to dispatch and manage customer invitations",
+        "token": "Registrationcode",
+        "columnTargetMail": "Targetaddress",
+        "uploadWhitelist": "Upload whitelist"
+      },
+      "errors": {
+        "creation": "Creation Error (eng)"
+      },
+      "detail":{
+        "saveButtonText": "Save",
+        "cancelButtonText": "Cancel"
+      }
+    }
+  }
+  

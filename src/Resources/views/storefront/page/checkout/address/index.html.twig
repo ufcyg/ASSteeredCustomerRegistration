@@ -1,0 +1,21 @@
+{% sw_extends '@Storefront/storefront/page/checkout/address/index.html.twig' %}
+{% block page_checkout_address_register %}
+    {% block page_checkout_address_register_card %}
+        {% if shopware.config.ASSteeredCustomerRegistration.config.registrationActiveState == "open" %}
+            {{ parent() }}
+            {# {% sw_include '@Storefront/storefront/page/checkout/address/register.html.twig' with {
+            'cardTitle': "checkout.addressRegisterCardTitle"|trans|sw_sanitize
+            } %} #}
+        {% elseif shopware.config.ASSteeredCustomerRegistration.config.registrationActiveState == "restricted" %}
+            <div class="col-lg-8">
+                <h1>Our registration is restricted at the moment. Only registered customers can place orders. You can register and wait for approval</h1>
+                {{ parent() }}
+            </div>
+        {% elseif shopware.config.ASSteeredCustomerRegistration.config.registrationActiveState == "closed" %}
+            <div class="col-lg-8">
+                <h1>Sorry, our registration is closed at the moment. Only registered customers can place orders.</h1>
+                <img src="https://picsum.photos/id/2/800/600/?blur" width="100%">
+            </div>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

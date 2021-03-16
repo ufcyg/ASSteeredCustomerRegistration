@@ -1,0 +1,19 @@
+{
+    "as-steered-customer-registration": {
+      "general": {
+        "mainMenuItemGeneral": "Gelenkte Kundenregistrierung",
+        "descriptionTextModule": "Werkzeug um Einladungen an neue Kunden zu verschicken und zu verwalten",
+        "token": "Registrierungscode",
+        "columnTargetMail": "Zieladresse",
+        "uploadWhitelist": "Freigabenliste hochladen"
+      },
+      "errors": {
+        "creation": "Creation Error (deu)"
+      },
+      "detail":{
+        "saveButtonText": "Speichern",
+        "cancelButtonText": "Abbrechen"
+      }
+    }
+  }
+  
