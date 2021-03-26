@@ -9,7 +9,7 @@ Shopware.Module.register('as-steered-registration', {
     name: 'steeredRegistration',
     title: 'as-steered-customer-registration.general.mainMenuItemGeneral',
     description: 'as-steered-customer-registration.general.descriptionTextModule',
-    color: '#ad00ad',
+    color: '#758CA3',
     icon: 'default-communication-envelope',
 
     snippets: {
@@ -33,9 +33,10 @@ Shopware.Module.register('as-steered-registration', {
 
     navigation: [{
         label: 'as-steered-customer-registration.general.mainMenuItemGeneral',
-        color: '#62ff80',
+        color: '#758CA3',
         path: 'as.steered.registration.overview',
         icon: 'default-communication-envelope',
-        position: 10
+        position: 10,
+        parent: 'sw-customer'
     }],
 });
