@@ -27,12 +27,5 @@
                 <argument type="service" id="service_container" />
             </call>
         </service>
-
-        <service id="ASSteeredCustomerRegistration\Core\Helper\SteeredCustomerRepositoryContainer" public="true">
-            <argument id="customer_group.repository" type="service" />
-            <argument id="customer.repository" type="service" />
-            <argument id="synlab_steered_customer_registration_whitelist.repository" type="service" />
-        </service>
-
     </services>
 </container>

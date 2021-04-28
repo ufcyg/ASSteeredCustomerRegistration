@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace ASSteeredCustomerRegistration;
 
@@ -52,7 +54,7 @@ class ASSteeredCustomerRegistration extends Plugin
         }
 
         $connection = $this->container->get(Connection::class);
-        
+
         $connection->executeUpdate('DROP TABLE IF EXISTS `synlab_steered_customer_registration_whitelist`');
         //
         $connection->executeUpdate('DROP TABLE IF EXISTS `synlab_steered_customer_registration`');

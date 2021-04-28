@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace ASSteeredCustomerRegistration\Core\Content\SteeredCustomerRegistrationWhitelist;
 
@@ -31,8 +33,8 @@ class SteeredCustomerRegistrationWhitelistDefinition extends EntityDefinition
     {
         return new FieldCollection(
             [
-                (new IdField('id','id'))->addFlags(new Required(), new PrimaryKey()),
-                new StringField('target_mail','targetMail')   
+                (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
+                new StringField('target_mail', 'targetMail')
             ]
         );
     }

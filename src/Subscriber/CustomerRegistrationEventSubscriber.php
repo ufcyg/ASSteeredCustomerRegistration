@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace ASSteeredCustomerRegistration\Subscriber;
 
@@ -22,9 +24,10 @@ class CustomerRegistrationEventSubscriber implements EventSubscriberInterface
     private $mailServiceHelper;
     /** @var string $senderName */
     private $senderName;
-    public function __construct(SystemConfigService $systemConfigService,
-                                MailServiceHelper $mailServiceHelper)
-    {
+    public function __construct(
+        SystemConfigService $systemConfigService,
+        MailServiceHelper $mailServiceHelper
+    ) {
         $this->systemConfigService = $systemConfigService;
         $this->mailServiceHelper = $mailServiceHelper;
         $this->senderName = 'Steered Customer Registration';
@@ -50,8 +53,7 @@ class CustomerRegistrationEventSubscriber implements EventSubscriberInterface
     public function onCustomerRegistered(CustomerRegisterEvent $event)
     {
         $registrationState = $this->systemConfigService->get('ASSteeredCustomerRegistration.config.registrationActiveState');
-        if($registrationState == 'open')
-        {// do not validate user if registration is fully open, this value is defined in the plugin configuration
+        if ($registrationState == 'open') { // do not validate user if registration is fully open, this value is defined in the plugin configuration
             return;
         }
 
@@ -59,29 +61,25 @@ class CustomerRegistrationEventSubscriber implements EventSubscriberInterface
         $customer = $event->getCustomer();
         // $customerGroupsRespository = $this->container->getCustomerGroup();
 
-        if ($this->whitelistEntryExistsCk($customer->getEmail()))
-        {//internal customer by registered email domain
+        if ($this->whitelistEntryExistsCk($customer->getEmail())) { //internal customer by registered email domain
             $steeredCustomerGroup = $this->systemConfigService->get('ASSteeredCustomerRegistration.config.internalCustomerGroup');
             $whitelistRepository = $this->container->get('synlab_steered_customer_registration_whitelist.repository');
             $criteria = new Criteria();
             $criteria->addFilter(new EqualsFilter('targetMail', $customer->getEmail()));
-            $searchResult = $whitelistRepository->search($criteria,Context::createDefaultContext());
+            $searchResult = $whitelistRepository->search($criteria, Context::createDefaultContext());
             $whitelistEntity = $searchResult->first();
             $whitelistRepository->delete([
                 ['id' => $whitelistEntity->getId()],
-            ],Context::createDefaultContext());
-        }
-        else
-        {//idle registration for approval
+            ], Context::createDefaultContext());
+        } else { //idle registration for approval
             $notification = 'Hallo,<br>
                             vielen Dank für Ihre Registrierung.<br>
                             Unser Support Team wird Ihre Anfrage prüfen und Ihren Account gegebenenfalls freischalten.<br>';
-            $this->mailServiceHelper->sendMyMail([$customer->getEmail() => $customer->getFirstName() . ' ' . $customer->getLastName()],$event->getSalesChannelContext()->getSalesChannel()->getId(), $this->senderName,'Willkommen!',$notification, $notification,['']);
+            $this->mailServiceHelper->sendMyMail([$customer->getEmail() => $customer->getFirstName() . ' ' . $customer->getLastName()], $event->getSalesChannelContext()->getSalesChannel()->getId(), $this->senderName, 'Willkommen!', $notification, $notification, ['']);
             $steeredCustomerGroup = $this->systemConfigService->get('ASSteeredCustomerRegistration.config.idleCustomerGroup');
         }
 
-        if($steeredCustomerGroup == null)
-        {
+        if ($steeredCustomerGroup == null) {
             return;
         }
         $this->updateCustomerEntity($customer, $steeredCustomerGroup);
@@ -92,7 +90,7 @@ class CustomerRegistrationEventSubscriber implements EventSubscriberInterface
         $customerID = $customer->getId();
         $customerRepository = $this->container->get('customer.repository');
         $customerRepository->update([
-            [ 'id' => $customerID, 'groupId' => $steeredCustomerGroup, 'requestedGroupId' => null]
+            ['id' => $customerID, 'groupId' => $steeredCustomerGroup, 'requestedGroupId' => null]
         ], Context::createDefaultContext());
     }
 
@@ -100,8 +98,8 @@ class CustomerRegistrationEventSubscriber implements EventSubscriberInterface
     {
         $whitelistRepository = $this->container->get('synlab_steered_customer_registration_whitelist.repository');
         $criteria = new Criteria();
-        $criteria->addFilter(new EqualsFilter('targetMail',$listEntry));
-        $searchResult = $whitelistRepository->search($criteria,Context::createDefaultContext());
+        $criteria->addFilter(new EqualsFilter('targetMail', $listEntry));
+        $searchResult = $whitelistRepository->search($criteria, Context::createDefaultContext());
         return count($searchResult) == 0 ? false : true;
     }
 }

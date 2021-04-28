@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace ASSteeredCustomerRegistration\Core\Content\SteeredCustomerRegistrationWhitelist;
 
@@ -8,7 +10,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
 class SteeredCustomerRegistrationWhitelistEntity extends Entity
 {
     use EntityIdTrait;
-    
+
     /**
      * @var string
      */
@@ -18,7 +20,7 @@ class SteeredCustomerRegistrationWhitelistEntity extends Entity
      * Get the value of targetMail
      *
      * @return  string
-     */ 
+     */
     public function getTargetMail()
     {
         return $this->targetMail;
@@ -30,7 +32,7 @@ class SteeredCustomerRegistrationWhitelistEntity extends Entity
      * @param  string  $targetMail
      *
      * @return  self
-     */ 
+     */
     public function setTargetMail(string $targetMail)
     {
         $this->targetMail = $targetMail;
