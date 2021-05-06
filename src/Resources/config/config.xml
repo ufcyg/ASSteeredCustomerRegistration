@@ -40,12 +40,6 @@
             <entity>customer_group</entity>
             <label>Choose customer group for internal customers to be assigned to if they register with a whitelisted eMail address</label>
         </component>
-
-        <component name="sw-entity-single-select">
-            <name>fallbackSaleschannelNotification</name>
-            <entity>sales_channel</entity>
-            <label>Choose a fallback sales channel as origin for notifications if no other sales channel is known</label>
-        </component>
         
     </card>
 </config>

@@ -82,7 +82,6 @@ class ASSteeredCustomerRegistrationController extends AbstractController
      */
     public function sendInvite(Request $request)
     {
-        $notificationSalesChannel = $this->systemConfigService->get('ASSteeredCustomerRegistration.config.fallbackSaleschannelNotification');
         $inviteList = json_decode($request->getContent(false), true);
         $inviteEntries = explode(';', $inviteList['inviteList']);
         $inviteLink = explode(';', $inviteList['inviteLink']);
@@ -93,7 +92,7 @@ class ASSteeredCustomerRegistrationController extends AbstractController
         }
         $inviteString = "Willkommen beim zentralen Proben- und Materialversand!<br><br>Bitte klicken Sie auf unten stehenden Link um sich im eShop zu registrieren. <br><br> {$inviteLink[0]}<br><br> Nutzen Sie für die Registrierung die Lieferadresse des Standortes für den Sie benötigte Rohmaterialen bestellen werden. Nutzen Sie zwingend die eMail-Adresse auf der Sie diese eMail erhalten. Sollten Sie versuchen sich mit einer anderen Mailadresse zu registrieren wird der dadurch entstehende Account sofort gelöscht.<br><br> Vielen Dank und viel Spaß!";
 
-        $this->mailserviceHelper->sendMyMail($recipients, $notificationSalesChannel, $this->senderName, 'Einladung zur Registrierung für den eShop des ZPMV', $inviteString, $inviteString, ['']);
+        $this->mailserviceHelper->sendMyMail($recipients, null, $this->senderName, 'Einladung zur Registrierung für den eShop des ZPMV', $inviteString, $inviteString, ['']);
 
 
         return new Response('', Response::HTTP_NO_CONTENT);
